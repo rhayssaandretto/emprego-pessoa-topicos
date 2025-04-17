@@ -1,7 +1,9 @@
 package com.example.rhayssa_justino_andretto_211631272_prova.services;
 
 import com.example.rhayssa_justino_andretto_211631272_prova.entities.Pessoa;
+import com.example.rhayssa_justino_andretto_211631272_prova.entities.Trabalho;
 import com.example.rhayssa_justino_andretto_211631272_prova.repositories.PessoaRepository;
+import com.example.rhayssa_justino_andretto_211631272_prova.repositories.TrabalhoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,13 @@ import java.util.List;
 public class PessoaService {
 
     private final PessoaRepository repository;
+    private final TrabalhoRepository trabalhoRepository;
 
-    public Pessoa create(Pessoa pessoa){
+    public Pessoa create(Pessoa pessoa, Long trabalhoId){
+        Trabalho trabalho = trabalhoRepository.findById(trabalhoId)
+                .orElseThrow(() -> new RuntimeException("Trabalho não encontrado"));
+
+        pessoa.setTrabalho(trabalho);
         return repository.save(pessoa);
     }
 

@@ -2,6 +2,7 @@ package com.example.rhayssa_justino_andretto_211631272_prova.controllers;
 
 import com.example.rhayssa_justino_andretto_211631272_prova.dtos.PessoaDTO;
 import com.example.rhayssa_justino_andretto_211631272_prova.entities.Pessoa;
+import com.example.rhayssa_justino_andretto_211631272_prova.entities.Trabalho;
 import com.example.rhayssa_justino_andretto_211631272_prova.services.PessoaService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -33,7 +34,8 @@ public class PessoaController {
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody PessoaDTO dto) {
         Pessoa pessoa = modelMapper.map(dto, Pessoa.class);
-        Pessoa savedPessoa = service.create(pessoa);
+
+        Pessoa savedPessoa = service.create(pessoa, dto.getTrabalhoId());
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()

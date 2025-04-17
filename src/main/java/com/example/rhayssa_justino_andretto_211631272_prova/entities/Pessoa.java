@@ -19,6 +19,6 @@ public class Pessoa {
 
     @ManyToOne
     @JoinColumn(name = "trabalho_id")
-//    @JsonIgnoreProperties("pessoas")
+    @JsonIgnoreProperties("pessoas")
     private Trabalho trabalho;
 }
